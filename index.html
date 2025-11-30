@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html>
+<head>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+</head>
 <body>
 
-<h2>ESP32 Button Test</h2>
-
-<button onclick="triggerESP()">Send Trigger</button>
+<h2>Global ESP32 Remote Button</h2>
+<button onclick="sendCommand()">Send Trigger</button>
 
 <script>
-function triggerESP() {
-    fetch("http://192.168.1.107/trigger")
-        .then(r => console.log("sent"))
-        .catch(e => console.error(e));
+const firebaseConfig = {
+  apiKey: "AIzaSyAixsnmYpRfdWaoBO27jefNZGaMbWc-ziQ",
+  authDomain: "espcontrol-944ef.firebaseapp.com",
+  projectId: "espcontrol-944ef",
+  storageBucket: "espcontrol-944ef.firebasestorage.app",
+  messagingSenderId: "319706537106",
+  appId: "1:319706537106:web:b5b09cbe2cd91920991a4b",
+  measurementId: "G-WN47BTRXBZ"
+};
+
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function sendCommand() {
+  db.collection("control").doc("command").set({
+    button: "pressed"
+  });
 }
 </script>
 
