@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ESP32 Button Test</h2>
+
+<button onclick="triggerESP()">Send Trigger</button>
+
+<script>
+function triggerESP() {
+    fetch("http://192.168.1.107/trigger")
+        .then(r => console.log("sent"))
+        .catch(e => console.error(e));
+}
+</script>
+
+</body>
+</html>
